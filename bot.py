@@ -19,16 +19,15 @@ bot = Bot(command_prefix=config.BOT_PREFIXES)
 bot.remove_command("help")
 
 # Load cogs
-if __name__ == "__main__":
-	for file in os.listdir("./Cogs/"):
-		if file.endswith(".py"):
-			cog = file[:-3]
-			try:
-				bot.load_extension(f"Cogs.{cog}")
-				logging.info(f"Loaded cog '{cog}'")
-			except Exception as e:
-				cog = f"{type(e).__name__}: {e}"
-				logging.error(f"Failed to load cog {cog}\n{cog}")
+for file in os.listdir("./Cogs/"):
+	if file.endswith(".py"):
+		cog = file[:-3]
+		try:
+			bot.load_extension(f"Cogs.{cog}")
+			logging.info(f"Loaded cog '{cog}'")
+		except Exception as e:
+			cog = f"{type(e).__name__}: {e}"
+			logging.error(f"Failed to load cog {cog}")
 
 
 # On ready event
@@ -51,11 +50,11 @@ async def on_message(message):
 		if message.author == message.author.bot:
 			logging.info(f'Ignored message, reason: Message origin is a bot')
 			return
-		# Dispatch message to be handled via cogs
+		# Dispatch messages to be handled via cogs
 		await bot.process_commands(message)
 
 
-# On command complete event
+# On command complete event, for logging
 @bot.event
 async def on_command_completion(ctx):
 	if BOT_READY:
