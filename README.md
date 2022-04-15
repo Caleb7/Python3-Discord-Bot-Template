@@ -18,5 +18,5 @@ Run:
 	Windows:
 		python3 bot.py
 
-Docker: 
-	docker-compose run --rm bot
+	Docker: 
+		docker-compose run --rm bot
