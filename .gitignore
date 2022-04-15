@@ -115,3 +115,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Adding secrets.py to gitignore for development
+secrets.py
