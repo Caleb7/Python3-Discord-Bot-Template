@@ -22,6 +22,28 @@ class BreakingBad(commands.Cog, name="breakingbad"):
             author = data[0]['author']
             await context.send(f'"{quote}" - {author}')
 
+        if len(args) == 1:
+            if args[0] == "death":
+                url = "https://www.breakingbadapi.com/api/random-death"
+                response = requests.get(url)
+                data = response.json()
+                death = data['death']
+                death_cause = data['cause']
+                death_responsible = data['responsible']
+                death_last_words = data['last_words']
+                death_nickname = data['nickname']
+                death_img = data['img']
+                # Send embed
+                embed = discord.Embed(title=f"{death}", description=f"Death Cause: {death_cause}", color=0x00ff00)
+                embed.add_field(name="Nickname", value=f"{death_nickname}", inline=False)
+                embed.add_field(name="Responsible", value=f"{death_responsible}", inline=False)
+                embed.add_field(name="Last Words", value=f"{death_last_words}", inline=False)
+                embed.set_image(url=f"{death_img}")
+                await context.send(embed=embed)
+                
+
+                
+
 
 def setup(bot):
     bot.add_cog(BreakingBad(bot))
