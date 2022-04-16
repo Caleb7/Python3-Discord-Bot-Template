@@ -1,24 +1,12 @@
-# Lightweight image for running the bot
-# Note: Don't use alpine
-FROM python:3.9-bullseye
-
-# Copy requirements.txt to the image
-ADD Build/requirements.txt /requirements.txt
-
-# Install requirements
-RUN pip3 install -r /requirements.txt
+# Ubuntu temporarily, for testing services
+FROM ubuntu:latest
 
 # Run apt-get install for the bot
 RUN apt-get update
+RUN apt-get install python3 -y
+RUN apt-get install python3-pip -y
 RUN apt-get install iputils-ping -y
-
-
-# Copy the bot to the image
-ADD bot.py /bot.py
-ADD config.py /config.py
-ADD secrets.py /secrets.py
-# Copy the entire cogs directory to the image
-ADD Cogs /Cogs
-
-# Start the bot
-RUN python3 /bot.py
+RUN pip3 install discord
+RUN pip3 install requests
+RUN pip3 install asyncio
+RUN pip3 install "aiohttp>=3.6.1,<3.8.0"

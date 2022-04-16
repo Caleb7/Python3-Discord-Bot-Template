@@ -1,5 +1,11 @@
 version: "3.3"
 
 services:
-  bot: 
+  bot:
     build: .
+    volumes: 
+     - .:/code
+     - ~/.ssh:/root/.ssh:ro
+    working_dir: /code
+    stdin_open: true
+    tty: true
