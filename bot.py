@@ -19,11 +19,11 @@ bot = Bot(command_prefix=config.BOT_PREFIXES)
 bot.remove_command("help")
 
 # Load cogs
-for file in os.listdir("./Cogs/"):
+for file in os.listdir("./cogs/"):
 	if file.endswith(".py"):
 		cog = file[:-3]
 		try:
-			bot.load_extension(f"Cogs.{cog}")
+			bot.load_extension(f"cogs.{cog}")
 			logging.info(f"Loaded cog '{cog}'")
 		except Exception as e:
 			cog = f"{type(e).__name__}: {e}"
